@@ -1,0 +1,3 @@
+k3s-main: "--mem 3G --disk 5G 20.04"
+k3s-worker-1: "--mem 4G --disk 5G 20.04"
+k3s-worker-2: "--mem 5G --disk 5G 20.04"

@@ -1,0 +1,16 @@
+---
+- name: Create Multipass VMs for local cluster
+  hosts: localhost
+  tasks:
+  - name: Read cluster node VM configuration from file
+    include_vars:
+      file: nodes.config.yml
+      name: config-nodes
+  - name: Generate cloud-init with SSH
+    include_tasks: gen-cloud-init.tasks.yml
+  - name: Create the VMs
+    include_tasks: vm.tasks.yml
+    vars:
+      node-name: "{{ item.key }}"
+      node-options: "{{ item.value }}"
+    loop: "{{ config-k3s | dict2items }}"
